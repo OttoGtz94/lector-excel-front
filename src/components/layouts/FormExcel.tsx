@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { alertToastify } from '../../helpers';
 import useUserExcel from '../../hooks/useUserExcel';
 import { UsuariosExcel } from '../../interfaces/users.excel.interface';
+import Button from './Button';
 
 const FormExcel = () => {
 	const [fileExcel, setFileExcel] = useState<any>();
@@ -81,7 +82,11 @@ const FormExcel = () => {
 						onChangeTypeXlsx(e.target.files[0])
 					}
 				/>
-				<button type='submit'>Enviar</button>
+				<Button
+					text='Cargar'
+					type='submit'
+					style={{ width: '100%', margin: '3px 0px' }}
+				/>
 			</form>
 		</>
 	);

@@ -3,7 +3,6 @@ import useUserExcel from '../../../hooks/useUserExcel';
 import { UsuariosExcel } from '../../../interfaces/users.excel.interface';
 import {
 	Box,
-	Button,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -22,6 +21,7 @@ import {
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Container } from '@mui/system';
 import dayjs from 'dayjs';
+import Button from '../../layouts/Button';
 
 const ShowExcel = () => {
 	const { usuariosExcel, saveInBD, setStateUsersExcel } =
@@ -133,7 +133,7 @@ const ShowExcel = () => {
 		<div>
 			<Box
 				sx={{
-					height: 400,
+					height: 380,
 					width: 'auto',
 				}}>
 				<DataGrid
@@ -158,12 +158,24 @@ const ShowExcel = () => {
 					}}
 				/>
 			</Box>
-			<button onClick={onCickSaveBD}>
-				Guardar en BD
-			</button>
-			<button onClick={onClickEdit}>
-				Editar renglón
-			</button>
+			<Button
+				text='Guardar en BD'
+				onClick={onCickSaveBD}
+				style={{
+					width: '200px',
+					margin: '3px 0px 0px 0px',
+				}}
+				type='button'
+			/>
+			<Button
+				text='Editar registro'
+				onClick={onClickEdit}
+				style={{
+					width: '200px',
+					margin: '3px 0px 0px 10px',
+					bgColor: '#ffcc00',
+				}}
+			/>
 			<Dialog
 				open={openDialog}
 				onClose={() => {
@@ -206,7 +218,8 @@ const ShowExcel = () => {
 							display={'flex'}
 							flexWrap={'wrap'}
 							justifyContent={'space-between'}
-							marginTop={'10px'}>
+							marginTop={'10px'}
+							marginBottom={'10px'}>
 							<TimePicker
 								label={'Hora de entrada'}
 								defaultValue={
@@ -248,28 +261,27 @@ const ShowExcel = () => {
 						</Box>
 					</LocalizationProvider>
 					<Button
-						variant='contained'
-						type='submit'
+						text='Actualizar'
+						onClick={onClickUpdate}
+						type='button'
 						style={{
-							marginTop: '10px',
-							//width: '200px',
+							bgColor: '#ff9800',
+							width: '100px',
 						}}
-						onClick={onClickUpdate}>
-						Actualizar
-					</Button>
+					/>
+
 					<Button
-						variant='contained'
-						type='submit'
-						style={{
-							marginTop: '10px',
-							//width: '200px',
-						}}
+						text='Cancelar'
 						onClick={() => {
 							setOpenDialog(false);
 							setUserEdit({});
-						}}>
-						Cancelar
-					</Button>
+						}}
+						type='button'
+						style={{
+							bgColor: '#363636',
+							width: '100px',
+						}}
+					/>
 				</DialogContent>
 			</Dialog>
 		</div>
