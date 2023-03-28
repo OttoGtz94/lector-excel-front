@@ -1,0 +1,45 @@
+.navbar {
+	background-color: $blackSecundary;
+	width: 100%;
+	height: 52px;
+	max-height: 52px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 20px;
+
+	h2 {
+		text-transform: uppercase;
+		span {
+			color: #217346;
+			font-size: 30px;
+		}
+	}
+
+	ul {
+		width: 20%;
+		//background-color: rebeccapurple;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 10px 20px;
+		.link {
+			list-style: none;
+			text-decoration: none;
+			//border: 1px solid #fff;
+			padding: 4px 3px;
+			font-family: 'Roboto Slab', serif;
+			font-family: $fontMain;
+			color: $colorGreen;
+			font-weight: 600;
+			font-size: 18px;
+
+			&:hover {
+				transition: 0.5s ease;
+				text-decoration: underline;
+				color: $colorFont;
+			}
+		}
+	}
+}
