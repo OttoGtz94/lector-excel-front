@@ -60,7 +60,6 @@ const FormExcel = () => {
 				},
 			);
 			alertToastify('success', res.data.msg);
-			console.log(res.data.data);
 			setStateUsersExcel(res.data.data);
 
 			setTimeout(() => {

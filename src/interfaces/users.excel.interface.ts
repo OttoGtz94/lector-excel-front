@@ -5,4 +5,5 @@ export interface UsuariosExcel {
 	punch_out?: string;
 	user_id?: string;
 	user_name?: string;
+	save?: boolean;
 }

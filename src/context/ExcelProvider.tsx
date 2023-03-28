@@ -26,7 +26,6 @@ const ExcelProvider = ({ children }: props) => {
 	>([]);
 
 	const setStateUsersExcel = (users: UsuariosExcel[]) => {
-		//console.log(users);
 		const arrUsuarios: UsuariosExcel[] = [];
 
 		users.forEach((user: any, index: number) => {
@@ -40,9 +39,13 @@ const ExcelProvider = ({ children }: props) => {
 				] = user[prop];
 			}
 			obj.id = index + 1;
+			!obj.save
+				? (obj.save = false)
+				: obj.save === true
+				? (obj.save = true)
+				: (obj.save = false);
 			arrUsuarios.push(obj);
 		});
-		console.log(arrUsuarios);
 
 		setUsuariosExcel(arrUsuarios);
 	};
@@ -50,7 +53,6 @@ const ExcelProvider = ({ children }: props) => {
 	const saveInBD = async (
 		listaUsuarios: UsuariosExcel[],
 	) => {
-		console.log(listaUsuarios);
 		try {
 			const { data } = await axios.post(
 				`${
@@ -58,7 +60,6 @@ const ExcelProvider = ({ children }: props) => {
 				}/excel/save-excel`,
 				{ users: listaUsuarios },
 			);
-			console.log(data, typeof data.duplicates);
 			if (typeof data.duplicates !== 'string') {
 				if (listaUsuarios.length === 1) {
 					alertToastify(
@@ -72,6 +73,35 @@ const ExcelProvider = ({ children }: props) => {
 					);
 				}
 			} else {
+				const newUsuariosExcel: UsuariosExcel[] = [];
+				//setUsuariosExcel(newUsuariosExcel);
+				usuariosExcel.filter(
+					(usuario: UsuariosExcel) => {
+						listaUsuarios.forEach(
+							(usuarioGuardado: UsuariosExcel) => {
+								if (
+									usuario.id === usuarioGuardado.id
+								) {
+									usuario.save = true;
+									!newUsuariosExcel.includes(
+										usuario,
+									) &&
+										newUsuariosExcel.push(
+											usuario,
+										);
+								} else {
+									!newUsuariosExcel.includes(
+										usuario,
+									) &&
+										newUsuariosExcel.push(
+											usuario,
+										);
+								}
+							},
+						);
+					},
+				);
+				setUsuariosExcel(newUsuariosExcel);
 				alertToastify('success', data.msg);
 			}
 		} catch (error: any) {
@@ -80,7 +110,6 @@ const ExcelProvider = ({ children }: props) => {
 	};
 
 	const updateInBD = async (usuario: UsuariosExcel) => {
-		console.log(usuario);
 		try {
 			/* const res = axios.post(`${
 					import.meta.env.VITE_BACKEND_URL

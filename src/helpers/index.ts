@@ -25,11 +25,9 @@ export const formatHourString = (
 	hour: string = '10:30',
 ): string => {
 	let hourDate = new Date();
-	console.log(hour, hour.split(':'));
 
 	const hora = Number(hour.split(':')[0]);
 	const minutos = Number(hour.split(':')[1]);
 	hourDate.setHours(hora, minutos);
-	console.log(hourDate.toString());
 	return hourDate.toString();
 };

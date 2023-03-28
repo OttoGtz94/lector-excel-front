@@ -64,7 +64,9 @@ const ShowExcel = () => {
 			width: 130,
 		},
 	];
-	const rows: UsuariosExcel[] = usuariosExcel;
+	const rows: UsuariosExcel[] = usuariosExcel.filter(
+		(usuario: UsuariosExcel) => usuario.save === false,
+	);
 
 	const onCickSaveBD = () => {
 		if (usuarios.length === 0) {
@@ -83,6 +85,7 @@ const ShowExcel = () => {
 					: null;
 			});
 		});
+
 		saveInBD(usersToSendBD);
 	};
 
@@ -98,26 +101,22 @@ const ShowExcel = () => {
 				'Selecciona un registro a editar',
 			);
 		} else {
-			console.log('editar', usuarios[0]);
 			setOpenDialog(true);
 			const usuarioSelecto: UsuariosExcel[] =
 				usuariosExcel.filter(
 					(usuario: UsuariosExcel) =>
 						usuario.id === usuarios[0],
 				);
-			console.log(usuarioSelecto);
 			if (!usuarioSelecto.length) {
 				alertToastify('error', 'Hubo un error.');
 				return;
 			}
 			setUserEdit(usuarioSelecto[0]);
-			//console.log(userEdit);
 		}
 	};
 
 	//Editar registros antes de guardar en la BD
 	const onClickUpdate = () => {
-		console.log(userEdit);
 		usuariosExcel.forEach((usuario: UsuariosExcel) =>
 			usuario.id === userEdit?.id
 				? ((usuario.user_name = userEdit?.user_name),
@@ -125,9 +124,9 @@ const ShowExcel = () => {
 				  (usuario.punch_out = userEdit?.punch_out))
 				: null,
 		);
-		console.log(usuariosExcel);
 		setStateUsersExcel(usuariosExcel);
-		//updateInBD(userEdit);
+		setOpenDialog(false);
+		setUserEdit({});
 	};
 
 	return (
@@ -190,7 +189,7 @@ const ShowExcel = () => {
 						autoFocus
 						margin='dense'
 						label='Nombre'
-						defaultValue={userEdit?.user_name}
+						defaultValue={userEdit?.user_name || ''}
 						fullWidth
 						required
 						onChange={(e: any) =>
@@ -210,11 +209,15 @@ const ShowExcel = () => {
 							marginTop={'10px'}>
 							<TimePicker
 								label={'Hora de entrada'}
-								defaultValue={dayjs(
-									formatHourString(
-										userEdit?.punch_in,
-									),
-								)}
+								defaultValue={
+									userEdit?.punch_in
+										? dayjs(
+												formatHourString(
+													userEdit?.punch_in,
+												),
+										  )
+										: null
+								}
 								onChange={e =>
 									setUserEdit({
 										...userEdit,
@@ -225,11 +228,15 @@ const ShowExcel = () => {
 							/>
 							<TimePicker
 								label={'Hora de salida'}
-								defaultValue={dayjs(
-									formatHourString(
-										userEdit?.punch_out,
-									),
-								)}
+								defaultValue={
+									userEdit?.punch_out
+										? dayjs(
+												formatHourString(
+													userEdit?.punch_out,
+												),
+										  )
+										: null
+								}
 								onChange={e =>
 									setUserEdit({
 										...userEdit,
