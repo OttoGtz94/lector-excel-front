@@ -12,6 +12,7 @@ interface props {
 interface stateInitial {
 	//decodedJWT: (token: string) => void;
 	auth: authModel;
+	setAuth: (param: authModel) => void;
 	hasToken: () => Promise<any>;
 }
 
@@ -70,7 +71,8 @@ const AuthProvider = ({ children }: props) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ hasToken, auth }}>
+		<AuthContext.Provider
+			value={{ hasToken, auth, setAuth }}>
 			{children}
 		</AuthContext.Provider>
 	);

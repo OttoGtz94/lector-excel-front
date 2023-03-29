@@ -30,65 +30,6 @@ body {
 
 		@import './main';
 
-		.homeUser {
-			.topBar {
-				background-color: $blackSecundary;
-				width: 100%;
-				height: 52px;
-				max-height: 52px;
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-				align-items: center;
-				padding: 5px 20px;
-
-				h2 {
-					text-transform: uppercase;
-					span {
-						color: $colorGreen;
-						font-size: 30px;
-					}
-				}
-
-				.user-info {
-					font-size: 20px;
-					span {
-						color: $colorGreen;
-						font-size: 17px;
-					}
-				}
-
-				.botonera {
-					display: inline-flex;
-					p {
-						font-size: 20px;
-						margin: 0px 5px;
-						cursor: pointer;
-						transition: 0.5s ease;
-
-						&:hover {
-							color: $colorGreen;
-						}
-					}
-				}
-			}
-			.containerOutlet {
-				height: calc(100vh - 52px);
-				width: 100%;
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: center;
-				align-items: center;
-
-				form {
-					width: 300px;
-					input {
-						width: 100%;
-						padding: 30px;
-						border: 2px solid $colorGreen;
-					}
-				}
-			}
-		}
+		@import './homeuser';
 	}
 }

@@ -15,6 +15,8 @@ import HomeUser from './components/pages/private/HomeUser';
 import FormExcel from './components/layouts/FormExcel';
 import ShowExcel from './components/pages/private/ShowData';
 import { ExcelProvider } from './context/ExcelProvider';
+import RegistersExcel from './components/pages/private/RegistersExcel';
+import Config from './components/pages/private/Config';
 
 function App() {
 	return (
@@ -49,6 +51,14 @@ function App() {
 								<Route
 									path='show-excel'
 									element={<ShowExcel />}
+								/>
+								<Route
+									path='ver-registros'
+									element={<RegistersExcel />}
+								/>
+								<Route
+									path='configuracion'
+									element={<Config />}
 								/>
 							</Route>
 						</Routes>

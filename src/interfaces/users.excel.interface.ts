@@ -6,4 +6,6 @@ export interface UsuariosExcel {
 	user_id?: string;
 	user_name?: string;
 	save?: boolean;
+	user_creator_id?: string;
+	_id?: string;
 }

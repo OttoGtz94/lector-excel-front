@@ -1,0 +1,20 @@
+.homeUser {
+	@import './topbar';
+	.containerOutlet {
+		height: calc(100vh - 52px);
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+
+		form {
+			width: 300px;
+			input {
+				width: 100%;
+				padding: 30px;
+				border: 2px solid $colorGreen;
+			}
+		}
+	}
+}

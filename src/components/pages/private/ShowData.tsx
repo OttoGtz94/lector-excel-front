@@ -22,6 +22,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Container } from '@mui/system';
 import dayjs from 'dayjs';
 import Button from '../../layouts/Button';
+import TableRegisters from '../../layouts/TableRegisters';
 
 const ShowExcel = () => {
 	const { usuariosExcel, saveInBD, setStateUsersExcel } =
@@ -85,7 +86,6 @@ const ShowExcel = () => {
 					: null;
 			});
 		});
-
 		saveInBD(usersToSendBD);
 	};
 
@@ -131,51 +131,38 @@ const ShowExcel = () => {
 
 	return (
 		<div>
-			<Box
-				sx={{
-					height: 380,
-					width: 'auto',
-				}}>
-				<DataGrid
-					rows={rows}
-					columns={columns}
-					initialState={{
-						pagination: {
-							paginationModel: {
-								pageSize: 5,
-							},
-						},
-					}}
-					style={{ backgroundColor: '#363636' }}
-					pageSizeOptions={[5]}
-					checkboxSelection
-					disableRowSelectionOnClick
-					onCellClick={e => {
-						console.log(e);
-					}}
-					onRowSelectionModelChange={(e: any) => {
-						setUsuarios(e);
-					}}
-				/>
-			</Box>
-			<Button
-				text='Guardar en BD'
-				onClick={onCickSaveBD}
-				style={{
-					width: '200px',
-					margin: '3px 0px 0px 0px',
-				}}
-				type='button'
-			/>
-			<Button
-				text='Editar registro'
-				onClick={onClickEdit}
-				style={{
-					width: '200px',
-					margin: '3px 0px 0px 10px',
-					bgColor: '#ffcc00',
-				}}
-			/>
+			{rows.length > 0 ? (
+				<>
+					<TableRegisters
+						columns={columns}
+						rows={rows}
+						onRowSelectionModelChange={e =>
+							setUsuarios(e)
+						}
+					/>
+					<Button
+						text='Guardar en BD'
+						onClick={onCickSaveBD}
+						style={{
+							width: '200px',
+							margin: '3px 0px 0px 0px',
+						}}
+						type='button'
+					/>
+					<Button
+						text='Editar registro'
+						onClick={onClickEdit}
+						style={{
+							width: '200px',
+							margin: '3px 0px 0px 10px',
+							bgColor: '#ffcc00',
+						}}
+					/>
+				</>
+			) : (
+				<p>No hay datos</p>
+			)}
+
 			<Dialog
 				open={openDialog}
 				onClose={() => {

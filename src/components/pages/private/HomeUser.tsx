@@ -16,7 +16,6 @@ const HomeUser = () => {
 			<div className='containerOutlet'>
 				<Outlet />
 			</div>
-			{/* <Sidebar /> */}
 		</div>
 	);
 };
