@@ -14,6 +14,7 @@ $fontMain: 'Nunito Sans', sans-serif;
 	box-sizing: border-box;
 }
 body {
+	@import '@sweetalert2/theme-wordpress-admin/wordpress-admin.scss';
 	font-family: $fontMain;
 	background-color: $blackMain;
 	color: $colorFont;
@@ -21,6 +22,7 @@ body {
 	font-weight: 300;
 	height: 100vh;
 	@import './alert';
+	@import 'error404';
 
 	.app {
 		max-width: 1920px;

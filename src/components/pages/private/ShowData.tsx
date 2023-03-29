@@ -23,6 +23,7 @@ import { Container } from '@mui/system';
 import dayjs from 'dayjs';
 import Button from '../../layouts/Button';
 import TableRegisters from '../../layouts/TableRegisters';
+import DialogEdit from '../../layouts/DialogEdit';
 
 const ShowExcel = () => {
 	const { usuariosExcel, saveInBD, setStateUsersExcel } =
@@ -30,8 +31,9 @@ const ShowExcel = () => {
 	const [usuarios, setUsuarios] = useState<number[]>([]);
 	const [openDialog, setOpenDialog] =
 		useState<boolean>(false);
-	const [userEdit, setUserEdit] =
-		useState<UsuariosExcel>();
+	const [userEdit, setUserEdit] = useState<UsuariosExcel>(
+		{},
+	);
 
 	const columns: GridColDef[] = [
 		{
@@ -162,115 +164,13 @@ const ShowExcel = () => {
 			) : (
 				<p>No hay datos</p>
 			)}
-
-			<Dialog
-				open={openDialog}
-				onClose={() => {
-					setOpenDialog(false);
-					setUserEdit({});
-				}}
-				style={{}}>
-				<DialogTitle>
-					Editar {userEdit?.user_name}-{userEdit?.date}
-				</DialogTitle>
-				<DialogContent>
-					Puedes modificar el <strong>nombre</strong> y
-					las horas de <strong>entrada</strong> y{' '}
-					<strong>salida</strong>.
-				</DialogContent>
-				<DialogContent
-					style={{
-						display: 'flex',
-						flexWrap: 'wrap',
-						justifyContent: 'space-around',
-					}}>
-					<TextField
-						autoFocus
-						margin='dense'
-						label='Nombre'
-						defaultValue={userEdit?.user_name || ''}
-						fullWidth
-						required
-						onChange={(e: any) =>
-							setUserEdit({
-								...userEdit,
-								user_name: e.target.value,
-							})
-						}
-					/>
-					<LocalizationProvider
-						dateAdapter={AdapterDayjs}>
-						<Box
-							width={'100%'}
-							display={'flex'}
-							flexWrap={'wrap'}
-							justifyContent={'space-between'}
-							marginTop={'10px'}
-							marginBottom={'10px'}>
-							<TimePicker
-								label={'Hora de entrada'}
-								defaultValue={
-									userEdit?.punch_in
-										? dayjs(
-												formatHourString(
-													userEdit?.punch_in,
-												),
-										  )
-										: null
-								}
-								onChange={e =>
-									setUserEdit({
-										...userEdit,
-										punch_in:
-											e?.format('HH:mm:a'),
-									})
-								}
-							/>
-							<TimePicker
-								label={'Hora de salida'}
-								defaultValue={
-									userEdit?.punch_out
-										? dayjs(
-												formatHourString(
-													userEdit?.punch_out,
-												),
-										  )
-										: null
-								}
-								onChange={e =>
-									setUserEdit({
-										...userEdit,
-										punch_out:
-											e?.format('HH:mm:a'),
-									})
-								}
-							/>
-						</Box>
-					</LocalizationProvider>
-					<Button
-						text='Actualizar'
-						onClick={onClickUpdate}
-						type='button'
-						style={{
-							bgColor: '#ff9800',
-							width: '100px',
-						}}
-					/>
-
-					<Button
-						text='Cancelar'
-						onClick={() => {
-							setOpenDialog(false);
-							setUserEdit({});
-						}}
-						type='button'
-						style={{
-							bgColor: '#363636',
-							width: '100px',
-						}}
-					/>
-				</DialogContent>
-			</Dialog>
+			<DialogEdit
+				openDialog={openDialog}
+				setOpenDialog={setOpenDialog}
+				setUserEdit={setUserEdit}
+				objUser={userEdit}
+				onClickUpdate={onClickUpdate}
+			/>
 		</div>
 	);
 };

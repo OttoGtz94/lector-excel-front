@@ -17,6 +17,7 @@ import ShowExcel from './components/pages/private/ShowData';
 import { ExcelProvider } from './context/ExcelProvider';
 import RegistersExcel from './components/pages/private/RegistersExcel';
 import Config from './components/pages/private/Config';
+import Error404 from './components/pages/public/Error404';
 
 function App() {
 	return (
@@ -39,6 +40,10 @@ function App() {
 										element={<Register />}
 									/>
 								</Route>
+								<Route
+									path='*'
+									element={<Error404 />}
+								/>
 							</Route>
 
 							<Route
@@ -56,9 +61,15 @@ function App() {
 									path='ver-registros'
 									element={<RegistersExcel />}
 								/>
-								<Route
+								{/*Descomentar cuando este listo la pagina de
+										cofiguracion*/}
+								{/* <Route
 									path='configuracion'
 									element={<Config />}
+								/> */}
+								<Route
+									path='*'
+									element={<Error404 />}
 								/>
 							</Route>
 						</Routes>

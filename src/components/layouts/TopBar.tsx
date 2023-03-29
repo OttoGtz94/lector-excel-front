@@ -55,10 +55,12 @@ const TopBar = () => {
 					{' '}
 					<FontAwesomeIcon icon={faDatabase} />
 				</Link>
-				<p className='icon iconSeparator'>|</p>
+				{/*Descomentar cuando este listo la pagina de
+				cofiguracion*/}
+				{/* <p className='icon iconSeparator'>|</p>
 				<Link to={'configuracion'} className='icon'>
 					<FontAwesomeIcon icon={faGear} />
-				</Link>
+				</Link> */}
 				<p className='icon iconSeparator'>|</p>
 				<p onClick={onClickLogout} className='icon'>
 					<FontAwesomeIcon

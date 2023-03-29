@@ -108,9 +108,6 @@ const RegistersExcel = () => {
 
 	return (
 		<div>
-			<p onClick={getRegistersDB}>
-				<FontAwesomeIcon icon={faRotateRight} />
-			</p>
 			{registersExcel.length > 0 ? (
 				<>
 					<TableRegisters
